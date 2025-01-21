@@ -1,0 +1,388 @@
+/* General container for the dashboard */
+.dashboard-container {
+  display: flex;
+  flex-direction: column; /* Start with a column layout */
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-heading-heading{
+  color:#9f37e0;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.feature-heading{
+  color:#921bdb;
+  font-weight: bolder;
+  font-size: 2.5rem;
+}
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.sidebar.dark {
+  background-color: #333;
+  color: white;
+}
+
+.sidebar .profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.profile-detail-username{
+  color:#9f37e0;
+  font-weight: bolder;
+}
+
+.sidebar .profile-section img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-left: 40px;
+  margin-right: 15px;
+}
+
+.sidebar .profile-section div {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .profile-section h3,
+.sidebar .profile-section p {
+  margin: 0;
+}
+
+.sidebar-options {
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+.sidebar-options button,
+.sidebar-options a {
+  display: block;
+  margin: 10px 0;
+  color: inherit;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  margin-top: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #9f37e0;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.sidebar-options button:hover,
+.sidebar-options a:hover {
+  background-color: #8c0fda;
+  color: white;
+}
+
+.sidebar-options button {
+  background-color: transparent;
+  border: 1px solid #9f37e0;
+}
+
+.sidebar-options a {
+  font-weight: 600;
+}
+
+.sidebar-options button,
+.sidebar-options a {
+  font-size: 18px;
+}
+
+/* Sidebar header */
+.sidebar h1 {
+  color: #9f37e0;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 270px; /* Sidebar width + some margin */
+  padding: 20px;
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.filters label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.filters select {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.filters select:focus {
+  border: 1px solid #9f37e0;
+}
+
+/* Range Picker */
+.ant-picker-range {
+  width: 250px;
+}
+
+.ant-picker-range input {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Chart Section */
+.chart-container {
+  margin-top: 30px;
+}
+
+.chart-container h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.chart-container .bar-chart {
+  max-height: 500px;
+}
+
+.chart-container .line-chart {
+  margin-top: 30px;
+}
+
+/* Dark Mode Styling */
+.dark-mode {
+  background-color: #2f2f2f;
+  color: white;
+}
+
+.dark-mode .main-content {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .filters select {
+  background-color: #444;
+  color: white;
+  border-color: #666;
+}
+
+.dark-mode .sidebar {
+  background-color: #222;
+}
+
+.dark-mode .sidebar-options button:hover,
+.dark-mode .sidebar-options a:hover {
+  background-color: #9f37e0;
+  color: white;
+}
+
+/* Profile Modal Styling */
+.profile-modal-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profile-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-modal h2 {
+  text-align: center;
+  color: #9f37e0;
+  margin-bottom: 20px;
+}
+
+.profile-modal .profile-image-upload {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-modal .profile-image-upload input {
+  display: none;
+}
+
+.profile-modal .profile-image-upload label {
+  cursor: pointer;
+  background-color: #9f37e0;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.profile-modal .profile-image-upload label:hover {
+  background-color: #7e2fa3;
+}
+
+.profile-modal button {
+  width: 100%;
+  background-color: #9f37e0;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-modal button:hover {
+  background-color: #7e2fa3;
+}
+
+/* Dark Mode for Profile Modal */
+.dark-mode .profile-modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .profile-modal {
+  background-color: #444;
+  color: white;
+}
+
+.dark-mode .profile-modal button {
+  background-color: #7e2fa3;
+}
+
+.dark-mode .profile-modal button:hover {
+  background-color: #9f37e0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px; /* Reduce sidebar width */
+  }
+
+  .main-content {
+    margin-left: 220px; /* Adjust content margin */
+  }
+
+  .sidebar-options button, .sidebar-options a {
+    font-size: 14px;
+  }
+
+  .profile-section img {
+    width: 120px; /* Reduce profile image size */
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column; /* Stack sidebar and content */
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static; /* Remove fixed position for mobile view */
+    box-shadow: none;
+    padding: 10px;
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove content margin */
+  }
+
+  .sidebar-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar-options button,
+  .sidebar-options a {
+    margin: 5px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .profile-section img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .dashboard-heading-heading {
+    font-size: 2rem; /* Reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    display: none; /* Hide sidebar on small screens */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove content margin */
+    padding: 10px;
+  }
+
+  .sidebar-options {
+    display: none; /* Hide sidebar options on small screens */
+  }
+
+  .filters {
+    flex-direction: column; /* Stack filters vertically */
+  }
+
+  .filters select {
+    margin-bottom: 10px;
+    width: 100%; /* Make select inputs full-width */
+  }
+
+  .profile-section img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .dashboard-heading-heading {
+    font-size: 1.8rem; /* Further reduce font size for small screens */
+  }
+}

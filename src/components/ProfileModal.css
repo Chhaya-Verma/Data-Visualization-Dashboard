@@ -1,0 +1,109 @@
+/* Modal Background */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    z-index: 1000; /* Make sure the modal is above other content */
+    padding: 20px;
+  }
+  
+  /* Modal Content Box */
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    min-width: 350px;
+    text-align: center;
+    position: relative; /* For positioning the close button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for a raised look */
+  }
+  
+  /* Profile Image Style */
+  .profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Circular profile image */
+    object-fit: cover; /* Ensure the image covers the circle */
+    margin-bottom: 20px;
+  }
+  
+  /* File Input Styling */
+  input[type="file"] {
+    margin: 10px 0;
+  }
+  
+  /* Save Button Style */
+  button {
+    padding: 10px;
+    background-color: #4CAF50; /* Green background for Save */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  /* Cancel Button Style */
+  button.cancel {
+    background-color: #f44336; /* Red background for Cancel */
+    margin-left: 10px;
+  }
+  
+  button.cancel:hover {
+    background-color: #da190b; /* Darker red on hover */
+  }
+  
+
+  /* Profile Image Container */
+.profile-image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Profile Image Style */
+.profile-image {
+  width: 150px; /* Larger size */
+  height: 150px; /* Same height for circular shape */
+  border-radius: 50%; /* Circular profile image */
+  object-fit: cover; /* Ensure the image covers the circle */
+  border: 5px solid #4CAF50; /* Green border around the image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  cursor: pointer; /* Indicate the image is interactive */
+  margin-bottom: 20px; /* Space between image and button */
+}
+
+/* Hover Effect for Profile Image */
+.profile-image:hover {
+  transform: scale(1.1); /* Slightly enlarge the image */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Profile Image Change Button */
+.change-profile-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+.change-profile-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
