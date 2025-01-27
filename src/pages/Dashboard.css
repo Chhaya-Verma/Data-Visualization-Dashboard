@@ -5,6 +5,8 @@
   height: 100vh;
   font-family: 'Arial', sans-serif;
   transition: background-color 0.3s ease;
+ /* Example of a linear gradient background */
+
 }
 
 .dashboard-heading-heading{

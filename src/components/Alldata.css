@@ -4,7 +4,9 @@
 
 h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
+    color:  #971ce4;
+    font-weight: bolder;
 }
 
 .filters {
@@ -54,12 +56,12 @@ h1 {
 .summary-item h3 {
     margin: 0;
     font-size: 18px;
-    color: #333;
+    color: whitesmoke;
     font-weight: bolder;
 }
 
 .summary-item p {
     font-size: 24px;
-    color: #007BFF;
+    color: whitesmoke;
     font-weight: bold;
 }

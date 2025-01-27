@@ -506,7 +506,6 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, 
 
 const { RangePicker } = DatePicker;
 
-// Register chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -527,7 +526,7 @@ const Dashboard = () => {
   const [endDate, setEndDate] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [profileImage, setProfileImage] = useState("default-profile.png");
+  const [profileImage, setProfileImage] = useState("https://cdn-icons-png.flaticon.com/512/5951/5951752.png"); // Default Profile Image
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(""); // userId from localStorage
@@ -543,7 +542,10 @@ const Dashboard = () => {
         startDate: startDate ? startDate.format("YYYY-MM-DD") : "",
         endDate: endDate ? endDate.format("YYYY-MM-DD") : "",
       };
+
       const response = await axios.get("http://localhost:5000/data", { params });
+
+      // Set the filtered data from the response
       setFilteredData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -551,7 +553,7 @@ const Dashboard = () => {
   }, [ageFilter, genderFilter, startDate, endDate]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(); // This will run on initial load with no date filters
   }, [fetchData]);
 
   // Dark Mode Toggle
@@ -577,7 +579,7 @@ const Dashboard = () => {
           const response = await axios.get(`http://localhost:5000/users/${userId}`);
           setUsername(response.data.username);
           setEmail(response.data.email);
-          setProfileImage(response.data.profileImage || "default-profile.png"); // Default image if not set
+          setProfileImage(response.data.profileImage || "https://cdn-icons-png.flaticon.com/512/5951/5951752.png"); // Default image if not set
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -587,7 +589,6 @@ const Dashboard = () => {
     fetchUserData();
   }, [userId]);
 
-  // Store preferences to localStorage
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     localStorage.setItem("darkMode", !darkMode);
@@ -646,14 +647,12 @@ const Dashboard = () => {
     };
   };
 
-  // Logout Function
   const handleLogout = async () => {
     // Clear data from localStorage
     localStorage.removeItem("userId");
     localStorage.removeItem("profileImage");
     localStorage.removeItem("darkMode");
 
-    // Delete the user's login data from the JSON server
     try {
       if (userId) {
         await axios.delete(`http://localhost:5000/logindata/${userId}`);
@@ -662,7 +661,6 @@ const Dashboard = () => {
       console.error("Error deleting user data:", error);
     }
 
-    // Redirect to login page
     navigate("/login");
   };
 
@@ -682,11 +680,10 @@ const Dashboard = () => {
           </button>
 
           <Link to="/data">Data</Link>
-          <Link to="/calendar">Calendar</Link>
-          <Link to="/charts">Charts</Link>
+          
+          
           <Link to="/help">Help</Link>
 
-          {/* Logout Button */}
           <button onClick={handleLogout} className="logout-button">
             Logout
           </button>
@@ -694,18 +691,18 @@ const Dashboard = () => {
       </div>
 
       <div className="main-content">
-        <h1 className="dashboard-heading">Dashboard</h1>
+        <h1 className="dashboard-heading" style={{ color: '#9f37e0', fontSize: '43px', fontWeight:'bolder' }}>Dashboard</h1>
 
         {/* Filters Section */}
         <div className="filters">
-          <label>Age Group:</label>
+          <label  style={{ color: '#9f37e0', fontWeight:'bolder'}}>Age Group:</label>
           <select onChange={(e) => setAgeFilter(e.target.value)} value={ageFilter}>
             <option value="">All</option>
             <option value="15-25">15-25</option>
             <option value=">25">25+</option>
           </select>
 
-          <label>Gender:</label>
+          <label  style={{ color: '#9f37e0', fontWeight:'bolder'}}>Gender:</label>
           <select onChange={(e) => setGenderFilter(e.target.value)} value={genderFilter}>
             <option value="">All</option>
             <option value="Male">Male</option>
@@ -713,14 +710,24 @@ const Dashboard = () => {
           </select>
         </div>
 
-        <RangePicker
-          onChange={(dates) => {
-            setStartDate(dates[0]);
-            setEndDate(dates[1]);
-          }}
-          value={[startDate, endDate]}
+        {/* Start Date Picker */}
+        <label  style={{ color: '#9f37e0', fontWeight:'bolder'}}>Start Date:</label>
+        <DatePicker
+          onChange={(date) => setStartDate(date)}
+          value={startDate}
           format="YYYY-MM-DD"
         />
+
+        {/* End Date Picker */}
+        <label  style={{ color: '#9f37e0', fontWeight:'bolder'}}>End Date:</label>
+        <DatePicker
+          onChange={(date) => setEndDate(date)}
+          value={endDate}
+          format="YYYY-MM-DD"
+        />
+
+        {/* Filter Button */}
+        <button onClick={fetchData}  style={{ backgroundColor: '#9f37e0', fontSize:'15px', fontWeight:'bolder'}}>Filter</button>
 
         {/* Chart Section */}
         {filteredData.length > 0 ? (
@@ -751,13 +758,16 @@ const Dashboard = () => {
                     responsive: true,
                     scales: {
                       x: {
-                        ticks: {
-                          maxRotation: 45,
-                          minRotation: 0,
-                          autoSkip: false,
-                        },
-                        grid: {
-                          display: true,
+                        ticks: { color: darkMode ? "white" : "black" },
+                      },
+                      y: {
+                        ticks: { color: darkMode ? "white" : "black" },
+                      },
+                    },
+                    plugins: {
+                      legend: {
+                        labels: {
+                          color: darkMode ? "white" : "black",
                         },
                       },
                     },
@@ -767,17 +777,18 @@ const Dashboard = () => {
             )}
           </>
         ) : (
-          <p>Loading data...</p>
+          <h2>No Data Available</h2>
+        )}
+
+        {/* Profile Modal */}
+        {showProfileModal && (
+          <ProfileModal
+            currentImage={profileImage}
+            onClose={toggleProfileModal}
+            onUpdateImage={updateProfileImage}
+          />
         )}
       </div>
-
-      {showProfileModal && (
-        <ProfileModal
-          isOpen={showProfileModal}
-          closeModal={toggleProfileModal}
-          updateProfileImage={updateProfileImage}
-        />
-      )}
     </div>
   );
 };
