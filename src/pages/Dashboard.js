@@ -503,6 +503,7 @@ import "./Dashboard.css";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileModal from "../components/ProfileModal"; // Modal to change profile image
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from "chart.js";
+import Cookies from "js-cookie";  // Importing cookies library
 
 const { RangePicker } = DatePicker;
 
@@ -529,7 +530,7 @@ const Dashboard = () => {
   const [profileImage, setProfileImage] = useState("https://cdn-icons-png.flaticon.com/512/5951/5951752.png"); // Default Profile Image
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(""); // userId from localStorage
+  const [userId, setUserId] = useState(""); // userId from cookies
 
   const navigate = useNavigate();
 
@@ -558,15 +559,13 @@ const Dashboard = () => {
 
   // Dark Mode Toggle
   useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode");
-    const savedImage = localStorage.getItem("profileImage");
-    const savedUserId = localStorage.getItem("userId");
+    const savedMode = Cookies.get("darkMode");
+    const savedImage = Cookies.get("profileImage");
+    const savedUserId = Cookies.get("userId");
 
     if (savedMode) setDarkMode(savedMode === "true");
     if (savedImage) setProfileImage(savedImage);
-    if (savedUserId) {
-      setUserId(savedUserId); // Store userId
-    }
+    if (savedUserId) setUserId(savedUserId); // Store userId
 
     document.body.className = darkMode ? "dark-mode" : "light-mode";
   }, [darkMode]);
@@ -591,14 +590,14 @@ const Dashboard = () => {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem("darkMode", !darkMode);
+    Cookies.set("darkMode", !darkMode);  // Save dark mode setting to cookies
   };
 
   const toggleProfileModal = () => setShowProfileModal(!showProfileModal);
 
   const updateProfileImage = (newImage) => {
     setProfileImage(newImage);
-    localStorage.setItem("profileImage", newImage);
+    Cookies.set("profileImage", newImage);  // Save new profile image to cookies
   };
 
   // Process data for Bar Chart
@@ -648,10 +647,10 @@ const Dashboard = () => {
   };
 
   const handleLogout = async () => {
-    // Clear data from localStorage
-    localStorage.removeItem("userId");
-    localStorage.removeItem("profileImage");
-    localStorage.removeItem("darkMode");
+    // Clear data from cookies
+    Cookies.remove("userId");
+    Cookies.remove("profileImage");
+    Cookies.remove("darkMode");
 
     try {
       if (userId) {
@@ -680,8 +679,7 @@ const Dashboard = () => {
           </button>
 
           <Link to="/data">Data</Link>
-          
-          
+
           <Link to="/help">Help</Link>
 
           <button onClick={handleLogout} className="logout-button">
